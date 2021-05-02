@@ -24,6 +24,6 @@ public class MenuActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        
+
     }
 }
