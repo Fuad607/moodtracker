@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     private TextView link_regist;
     private ProgressBar loading;
-    private  static  String URL_LOGIN="http://192.168.56.1/api/users/checkUser";
+    private  static  String URL_LOGIN="http://192.168.0.231/api/users/checkUser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                             String success=jsonObject.getString("response");
                             if(success.equals("success")){
                                 Toast.makeText(LoginActivity.this,"Successly Login",Toast.LENGTH_SHORT).show();
+
+                              startActivity(new Intent(LoginActivity.this,MenuActivity.class));
+
+
                             }
                             else if(success.equals("not_exist")){
                                 Toast.makeText(LoginActivity.this,"False Email or Password ",Toast.LENGTH_SHORT).show();

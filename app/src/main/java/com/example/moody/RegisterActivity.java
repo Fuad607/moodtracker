@@ -1,5 +1,6 @@
 package com.example.moody;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText username, email, password,c_password;
     private Button btn_regist;
     private ProgressBar loading;
-    private static String URL_REGIST="http://192.168.56.1/api/users";
+    private static String URL_REGIST="http://192.168.0.231/api/users";
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         final String username= this.username.getText().toString().trim();
         final String email= this.email.getText().toString().trim();
         final String password= this.password.getText().toString().trim();
+        DB = new DBHelper(this);
 
         StringRequest stringRequest= new StringRequest(Request.Method.POST, URL_REGIST,
                 new Response.Listener<String>() {
@@ -86,6 +89,9 @@ public class RegisterActivity extends AppCompatActivity {
                             String success=jsonObject.getString("response");
                             if(success.equals("success")){
                                 Toast.makeText(RegisterActivity.this,"Register Success",Toast.LENGTH_SHORT).show();
+
+
+                                startActivity(new Intent(RegisterActivity.this,MainActivity.class));
                             }
                             else if(success.equals("email_exits")){
                                 Toast.makeText(RegisterActivity.this,"Email already used",Toast.LENGTH_SHORT).show();
